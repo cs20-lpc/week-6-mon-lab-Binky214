@@ -3,23 +3,25 @@
 #include <string>
 using namespace std;
 
-/*******************************************************************************
- * Function prototype
-*******************************************************************************/
+void towerHanoi(int i, string rod1, string rod2, string rod3, int& moves)
+{
 
-void towerHanoi(int, string, string, string, int&);
+    //no disks
+    if (i <= 0){ return; }
+        
+    //move i-1 disks from source to buffer
+    towerHanoi(i - 1, rod1, rod3, rod2, moves);
 
-/*******************************************************************************
- * Description:
- * Starting point of the program. Calls a function to recursively determine
- * solutions for the first 5 instances of the Tower of Hanoi problem.
- * 
- * Input:
- * N/A
- *
- * Output:
- * An integer to signal to the OS the exit code.
-*******************************************************************************/
+    //largest disc to target
+    cout << "Moving disc " << i 
+         << " from rod #" << rod1 
+         << " to rod #" << rod3 << "." << endl;
+
+    moves++;
+
+    //move i-1 disks from buffer to target
+    towerHanoi(i - 1, rod2, rod1, rod3, moves);
+}
 
 int main() {
     // solve the first 5 cases of the Tower of Hanoi problem
